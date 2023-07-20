@@ -38,6 +38,7 @@ return {
             },
             disabled = { -- disable formatting capabilities for the listed language servers
                 "clangd",
+                "html-lsp"
             },
             timeout_ms = 1000, -- default format timeout
             -- filter = function(client) -- fully override the default formatting function
@@ -51,7 +52,9 @@ return {
         -- adding a custom config for clangd using `clangd_extensions`
         setup_handlers = {
             -- add custom handler
-            clangd = function(_, opts) require("clangd_extensions").setup { server = opts } end
+            clangd = function(_, opts) require("clangd_extensions").setup { server = opts } end,
+            -- custom handler for rust and rust-tools
+            rust_analyzer = function(_, opts) require("rust-tools").setup { server = opts } end
         },
         config = {
             clangd = {
@@ -71,6 +74,30 @@ return {
             },
         },
     },
+    plugins = {
+        "simrat39/rust-tools.nvim", -- add lsp plugin
+        {
+            "williamboman/mason-lspconfig.nvim",
+            opts = {
+                -- ensure_installed = { "rust_analyzer" },
+                tools = {
+                    inlay_hints = {
+                        auto = true,
+                        only_current_line = false,
+                        show_parameter_hints = true,
+                        parameter_hints_prefix = "<- ",
+                        other_hints_prefix = "=> ",
+                        max_len_align = false,
+                        max_len_align_padding = 1,
+                        right_align = false,
+                        right_align_padding = 7,
+                        -- highlight = "Comment",
+                        highlight = "#1ababa",
+                    },
+                },
+            },
+        },
+    },
     -- This function is run last and is a good place to configuring
     -- augroups/autocommands and custom filetypes also this just pure lua so
     -- anything that doesn't fit in the normal config locations above can go here
@@ -87,5 +114,5 @@ return {
         --     ["~/%.config/foo/.*"] = "fooscript",
         --   },
         -- }
-    end,
+        end,
 }

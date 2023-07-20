@@ -16,4 +16,7 @@ return {
             -- ensure_installed = { "clangd" },     -- automatically install lsp
         },
     },
+
+    -- `rust-tool` for inlay hints
+    "simrat39/rust-tools.nvim",
 }
