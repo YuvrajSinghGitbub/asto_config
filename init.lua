@@ -17,7 +17,7 @@ return {
         },
     },
     -- Set colorscheme to use
-    colorscheme = "astrodark",
+    colorscheme = "catppuccin",
     -- Diagnostics configuration (for vim.diagnostics.config({...})) when diagnostics are on
     diagnostics = {
         virtual_text = true,
@@ -52,7 +52,7 @@ return {
         -- adding a custom config for clangd using `clangd_extensions`
         setup_handlers = {
             -- add custom handler
-            clangd = function(_, opts) require("clangd_extensions").setup { server = opts } end,
+            -- clangd = function(_, opts) require("clangd_extensions").setup { server = opts } end,
             -- custom handler for rust and rust-tools
             rust_analyzer = function(_, opts) require("rust-tools").setup { server = opts } end
         },
@@ -61,6 +61,7 @@ return {
                 capabilities = {
                     offsetEncoding = "utf-8",
                 },
+
             },
         },
     },
@@ -97,6 +98,41 @@ return {
                 },
             },
         },
+        -- "p00f/clangd_extensions.nvim", -- add lsp plugin
+        -- init = function()
+        --         -- load clangd extensions when clangd attaches
+        --         local augroup = vim.api.nvim_create_augroup("clangd_extensions", { clear = true })
+        --         vim.api.nvim_create_autocmd("LspAttach", {
+        --           group = augroup,
+        --           desc = "Load clangd_extensions with clangd",
+        --           callback = function(args)
+        --             if assert(vim.lsp.get_client_by_id(args.data.client_id)).name == "clangd" then
+        --               require "clangd_extensions"
+        --               -- add more `clangd` setup here as needed such as loading autocmds
+        --               vim.api.nvim_del_augroup_by_id(augroup) -- delete auto command since it only needs to happen once
+        --             end
+        --           end,
+        --         })
+        --       end,
+        -- {
+        --     "williamboman/mason-lspconfig.nvim",
+        --     opts = {
+        --         inlay_hints = {
+        --               inline = vim.fn.has("nvim-0.10") == 1,
+        --               only_current_line = false,
+        --               only_current_line_autocmd = { "CursorHold" },
+        --               show_parameter_hints = true,
+        --               parameter_hints_prefix = "<- ",
+        --               other_hints_prefix = "=> ",
+        --               max_len_align = false,
+        --               max_len_align_padding = 1,
+        --               right_align = false,
+        --               right_align_padding = 7,
+        --               highlight = "Comment",
+        --               priority = 100,
+        --           },
+        --     },
+        -- },
     },
     -- This function is run last and is a good place to configuring
     -- augroups/autocommands and custom filetypes also this just pure lua so
