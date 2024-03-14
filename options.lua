@@ -9,6 +9,9 @@ return {
     wrap = false,          -- sets vim.opt.wrap
     shiftwidth = 4,
     tabstop = 4,
+    list = true,
+    listchars = { tab = '» ', trail = '·', nbsp = '␣' },
+    scrolloff = 8,
   },
   g = {
     mapleader = " ",                 -- sets vim.g.mapleader
