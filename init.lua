@@ -38,7 +38,8 @@ return {
             },
             disabled = { -- disable formatting capabilities for the listed language servers
                 "clangd",
-                "html-lsp"
+                "html-lsp",
+                "htmx-lsp"
             },
             timeout_ms = 1000, -- default format timeout
             -- filter = function(client) -- fully override the default formatting function
@@ -48,13 +49,14 @@ return {
         -- enable servers that you already have installed without mason
         servers = {
             -- "pyright"
+            -- "gleam"
         },
         -- adding a custom config for clangd using `clangd_extensions`
         setup_handlers = {
             -- add custom handler
             -- clangd = function(_, opts) require("clangd_extensions").setup { server = opts } end,
             -- custom handler for rust and rust-tools
-            rust_analyzer = function(_, opts) require("rust-tools").setup { server = opts } end
+            rust_analyzer = function(_, opts) require("rust-tools").setup { server = opts } end,
         },
         config = {
             clangd = {
@@ -150,5 +152,6 @@ return {
         --     ["~/%.config/foo/.*"] = "fooscript",
         --   },
         -- }
+        vim.filetype.add({ extension = { templ = "templ" } })
         end,
 }
